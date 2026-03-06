@@ -1,0 +1,733 @@
+/* ========== FORUM - Light Professional Design ========== */
+
+/* Forum Controls Bar - placed in the page flow so breadcrumbs can sit above */
+.forum-controls-bar {
+  background: var(--background); /* blend with page background */
+  border-bottom: none;
+  padding: 1.5rem;
+  position: static; /* not sticky to navbar */
+  top: auto;
+  z-index: auto;
+  margin-top: 0.5rem; /* small gap from breadcrumbs */
+}
+
+.forum-controls-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.forum-controls-left {
+  flex: 1;
+}
+
+.forum-page-title {
+  margin: 0;
+  font-size: var(--font-size-heading);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.forum-controls-right {
+  flex-shrink: 0;
+}
+
+/* Prompt shown when user must log in to perform an action */
+.login-prompt {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-left: 1rem;
+  align-self: center;
+}
+
+/* New Post Modal */
+.forum-new-post-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forum-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.forum-modal-box {
+  position: relative;
+  z-index: 2;
+  background: var(--secondary);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.forum-modal-box h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.forum-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+}
+
+.forum-modal-close:hover {
+  background: var(--background);
+  color: var(--text);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.form-actions .btn {
+  flex: 1;
+}
+
+/* Posts List */
+.forum-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Post Card - Professional light theme */
+.forum-post-card {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.forum-post-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+.forum-card-left {
+  flex-shrink: 0;
+}
+
+.forum-card-thumbnail {
+  width: 80px;
+  height: 80px;
+  background: var(--background);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 1px solid var(--border);
+}
+
+.forum-card-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.forum-card-title {
+  margin: 0 0 0.15rem 0; /* tighten so meta sits closely under title */
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.forum-card-title a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forum-card-title a:hover,
+.forum-card-title a:focus {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+.kebab-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0.4rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  min-height: var(--min-touch);
+  min-width: var(--min-touch);
+  position: relative;
+}
+
+.kebab-btn::before {
+  content: 'Forum Post Options';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  margin-bottom: 0.5rem;
+  z-index: 101;
+}
+
+.kebab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% - 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--primary);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  pointer-events: none;
+  z-index: 101;
+}
+
+.kebab-btn:hover::before,
+.kebab-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.kebab-btn:hover {
+  background: var(--background);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.kebab-btn:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background: var(--background);
+}
+
+.kebab-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.kebab-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 140px;
+  overflow: hidden;
+}
+
+.kebab-menu[hidden] {
+  display: none;
+}
+
+.kebab-menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  min-height: var(--min-touch);
+}
+
+.kebab-menu-item:hover {
+  background: var(--background);
+  color: var(--accent);
+}
+
+.kebab-menu-item:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  background: var(--background);
+}
+
+.kebab-menu-danger {
+  color: #7F1D1D;
+}
+
+.kebab-menu-danger:hover {
+  background: #FDF2F2;
+  color: #991B1B;
+}
+
+/* Post detail page header with kebab menu */
+.post-detail {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  position: relative;
+}
+
+.post-header-detail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  position: relative;          /* needed for absolute children */
+  padding-right: 3rem;         /* space for the button */
+}
+
+.post-header-detail > div:first-child {
+  flex: 1;
+}
+
+/* put the kebab inside the header box, not outside it */
+.post-header-detail .kebab-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  margin: 0;
+  padding: 0.25rem;            /* slightly larger hit‑area */
+}
+
+/* drop the menu just beneath the button instead of at the bottom of the whole header */
+.post-header-detail .kebab-menu {
+  position: absolute;
+  top: 2rem;                   /* approximately button height + gap */
+  right: 0.5rem;
+  z-index: 10;
+}
+
+.post-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.post-body {
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Comment header with kebab menu */
+.comment-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-right: 2.5rem;
+}
+
+.comment-header > div:first-child {
+  flex: 1;
+}
+
+.comment-header .kebab-btn {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  margin: 0;
+}
+
+.comment-header .kebab-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.comment-author {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.comment-time {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.comment-body {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  align-items: center;
+}
+
+.forum-comment {
+  background: var(--secondary);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.forum-comment:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.08);
+}
+
+.forum-card-preview {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex: 1 0 auto; /* allow preview to take available space, pushing meta to bottom */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.forum-card-right {
+  flex-shrink: 0;
+  display: flex;
+  /* Stack stat and author/date vertically and center them */
+  flex-direction: column;
+  align-items: center;
+  /* Increase vertical spacing so author/date aren't visually attached to the counter */
+  gap: 1.25rem;
+  justify-content: flex-start;
+}
+
+.forum-card-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+/* Author and date shown below the comments counter */
+.post-author-meta {
+  display: flex;
+  flex-direction: row;
+  gap: 0.35rem;
+  align-items: flex-start; /* align text baseline with title */
+  justify-content: flex-start; /* left-align under the title */
+  font-size: 0.9rem;
+  color: var(--text); /* darker than muted for better legibility */
+  margin-top: 0; /* sit directly under the title */
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.stat-icon-views,
+.stat-icon-comments {
+  font-size: 1.1rem;
+}
+
+.btn-follow {
+  padding: 0.5rem 1rem;
+  background: var(--secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  min-height: var(--min-touch);
+}
+
+.btn-follow:hover {
+  background: var(--background);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-delete-post-card {
+  padding: 0.5rem 1rem;
+  background: #FDF2F2;
+  color: #7F1D1D;
+  border: 1px solid #FCA5A5;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  min-height: var(--min-touch);
+}
+
+.btn-delete-post-card:hover {
+  background: #FCA5A5;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .forum-controls-bar {
+    top: 50px;
+    padding: 1rem 1rem;
+  }
+
+  .forum-controls-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .forum-controls-right {
+    width: 100%;
+  }
+
+  .forum-controls-right .btn {
+    width: 100%;
+  }
+
+  .forum-post-card {
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .forum-card-thumbnail {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .forum-card-content {
+    flex: 1 0 auto;
+    min-width: 200px;
+  }
+
+  .forum-card-right {
+    flex: 1 0 100%;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .post-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .post-header-detail {
+    flex-direction: column;
+    gap: 0;
+    padding-right: 2.5rem;
+  }
+
+  .post-header-detail > div:first-child {
+    width: 100%;
+  }
+
+  .post-header-detail .kebab-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    margin: 0;
+  }
+
+  /* match the non-responsive placement so the menu stays near the button */
+  .post-header-detail .kebab-menu {
+    position: absolute;
+    top: 2rem;
+    right: 0.5rem;
+    z-index: 10;
+  }
+
+  .comment-header {
+    flex-direction: column;
+    gap: 0;
+    padding-right: 2rem;
+  }
+
+  .comment-header > div:first-child {
+    width: 100%;
+  }
+
+  .comment-header .kebab-btn {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    margin: 0;
+  }
+
+  .kebab-btn {
+    align-self: flex-end;
+    margin-top: -0.5rem;
+  }
+
+  .kebab-menu {
+    right: auto;
+    left: 0;
+  }
+
+  .forum-modal-box {
+    width: 95%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .forum-controls-bar {
+    top: 50px;
+    padding: 1rem;
+  }
+
+  .forum-page-title {
+    font-size: 1.25rem;
+  }
+
+  .forum-post-card {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .forum-card-thumbnail {
+    width: 100%;
+    height: 100px;
+    font-size: 1.5rem;
+  }
+
+  .forum-card-content {
+    width: 100%;
+  }
+
+  .forum-card-right {
+    flex: 1 0 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-follow,
+  .btn-delete-post-card {
+    flex: 0 1 auto;
+  }
+
+  .forum-modal-box {
+    width: 98%;
+    padding: 1.25rem;
+  }
+
+  .forum-modal-box h2 {
+    font-size: 1.25rem;
+  }
+}
+

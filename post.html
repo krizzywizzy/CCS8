@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum Post | Ace Prosthetics Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fab.css">
+  <link rel="stylesheet" href="css/forum.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('fab_theme');
+      if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        savedTheme = 'dark';
+      }
+      
+      if (savedTheme === 'dark') {
+        var style = document.createElement('style');
+        style.id = 'theme-critical';
+        style.textContent = 'html{color-scheme:dark}body{background:#1A1A1A;color:#F5F9FC}.navbar{background:#2A2A2A;border-bottom-color:#404040}.navbar-brand{color:#4A90E2}.nav-link{color:#F5F9FC}.breadcrumb{background:#1A1A1A}.breadcrumb-list a{color:#4A90E2}.breadcrumb-list [aria-current="page"]{color:#B0B0B0}.card,.filters-section,.admin-container,.forum-controls,.section-header,.comparison-section,.prosthetic-card,.tutorial-card,.modal-content,.modal-overlay,.filter-checkbox{background:#2A2A2A;border-color:#404040;color:#F5F9FC}.dropdown-menu,.admin-dropdown-menu{background:#2A2A2A;border-color:#404040}.btn-primary{background:#4A90E2;color:#FFFFFF}.btn-secondary{background:#2A2A2A;color:#F5F9FC;border-color:#404040}input,select,textarea{background:#1A1A1A;color:#F5F9FC;border-color:#404040}.prosthetic-image-wrapper,.feature-badge,.filter-checkbox{background:#1A1A1A}.breadcrumb-list a:hover{color:#6BA3F0}.modal-actions{background:#1A1A1A;border-top-color:#404040}.page-title,.forum-page-title,.modal-header h2{color:#F5F9FC}.prosthetic-category,.feature-tag{background:rgba(74,144,226,0.15);color:#6BA3F0}.prosthetic-price{color:#6BA3F0}.prosthetic-type,.prosthetic-description,.tutorial-description{color:#B0B0B0}.tutorial-thumbnail::after{background:rgba(255,255,255,0.85)}.modal-section h3{color:#4A90E2}.info-label{color:#B0B0B0}.feature-tag{border-color:rgba(74,144,226,0.3)}';
+        document.head.appendChild(style);
+        document.documentElement.classList.add('dark-mode-pending');
+        document.body.classList.add('dark-mode');
+      } else if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark-mode-pending');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.colorScheme = 'light';
+        var old = document.getElementById('theme-critical');
+        if (old && old.parentNode) old.parentNode.removeChild(old);
+      }
+    })();
+  </script></head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="navbar" role="banner">
+    <div class="navbar-inner">
+      <div class="nav-left">
+        <a href="index.html" class="navbar-brand">Ace Prosthetics Hub</a>
+      </div>
+      
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">&#9776;</button>
+      
+      <nav id="nav-menu" role="navigation" aria-label="Main">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="prosthetics-directory.html" class="nav-link">Prosthetics</a></li>
+          <li class="nav-item"><a href="forum.html" class="nav-link active">Community Forum</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="support.html" class="nav-link">Support</a></li>
+        </ul>
+        
+        <div class="nav-right">
+          <div class="nav-item" id="nav-signup">
+            <a href="auth.html?mode=register" class="nav-link btn btn-primary">Sign In</a>
+          </div>
+          <div class="nav-item nav-item-logout" style="display: none;">
+            <span id="nav-user" class="nav-link" style="pointer-events: none;"></span>
+            <button type="button" id="nav-logout" class="btn btn-secondary">Logout</button>
+          </div>
+          <div class="nav-item nav-admin-dropdown" style="display: none;">
+            <button type="button" id="admin-menu-btn" class="nav-link btn btn-secondary" aria-expanded="false" aria-haspopup="true">Admin</button>
+            <div class="admin-dropdown-menu" role="menu">
+              <a href="admin-tutorials.html" class="admin-dropdown-item" role="menuitem">Tutorials</a>
+              <a href="admin-prosthetics.html" class="admin-dropdown-item" role="menuitem">Prosthetics</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <ol class="breadcrumb-list" id="breadcrumb-list"></ol>
+    </div>
+  </nav>
+
+  <!-- Template for a post (includes accessible kebab menu identical to forum list) -->
+  <template id="post-template">
+    <article class="card post-template" aria-hidden="true">
+      <div class="post-header">
+        <div>
+          <h1 class="post-title">Post title</h1>
+          <div class="post-meta">By <strong>Author</strong></div>
+        </div>
+        <div class="menu-container">
+          <button type="button" class="kebab-btn" aria-expanded="false" aria-haspopup="menu" aria-label="Forum Post Options">
+            <svg width="4" height="16" viewBox="0 0 4 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2"/>
+              <circle cx="2" cy="8" r="2"/>
+              <circle cx="2" cy="14" r="2"/>
+            </svg>
+          </button>
+          <div class="kebab-menu" role="menu" hidden>
+            <button type="button" class="kebab-menu-item" role="menuitem" data-action="view" data-post-id="">View</button>
+            <button type="button" class="kebab-menu-item kebab-menu-danger" role="menuitem" data-action="delete" data-post-id="">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div class="post-body">Post content</div>
+    </article>
+  </template>
+
+  <main id="main-content" class="main-content" role="main">
+    <div class="forum-post-page">
+      <a href="forum.html" class="btn btn-secondary mb-2">&larr; Back to Forum</a>
+      
+      <article id="forum-post-detail" class="card" aria-live="polite">
+        <p class="alert alert-info">Loading post…</p>
+      </article>
+
+      <section id="forum-post-comments" class="mt-3" aria-live="polite">
+        <p class="alert alert-info">Loading comments…</p>
+      </section>
+
+      <section id="forum-post-new-comment" class="card mt-3" style="display: none;">
+        <div id="forum-comment-login-message" style="display: none;">
+          <p class="alert alert-info">Please login to comment</p>
+        </div>
+        <div id="forum-comment-form-container">
+          <h2>Add a comment</h2>
+          <form id="new-comment-form">
+            <div class="form-group">
+              <label for="comment-content" class="form-label">Your comment</label>
+              <textarea id="comment-content" name="content" class="form-control" required rows="4" placeholder="Share your thoughts…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post comment</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Login modal for forum likes -->
+  <div id="login-modal" class="modal" aria-hidden="true" aria-labelledby="login-modal-title">
+    <div class="modal-overlay"></div>
+    <div class="modal-box">
+      <button type="button" class="modal-close" aria-label="Close modal" data-dismiss="modal">&times;</button>
+      <h2 id="login-modal-title" class="modal-title">Login to Like</h2>
+      <p class="modal-message">Please login to like a comment or post</p>
+      <div class="modal-actions">
+        <a href="auth.html?mode=login&redirect=forum.html" class="btn btn-primary">Login</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Exit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm delete modal -->
+  <div id="confirm-modal" class="modal" aria-hidden="true" aria-labelledby="confirm-modal-title">
+    <div class="modal-overlay"></div>
+    <div class="modal-box">
+      <button type="button" class="modal-close" aria-label="Close modal" data-dismiss-confirm>&times;</button>
+      <h2 id="confirm-modal-title" class="modal-title">Confirm Delete</h2>
+      <p id="confirm-modal-message" class="modal-message">Are you sure you want to delete this item? This cannot be undone.</p>
+      <div class="modal-actions confirm-actions">
+        <button type="button" class="btn btn-secondary" data-dismiss-confirm>Cancel</button>
+        <button type="button" id="confirm-modal-ok" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success modal -->
+  <div id="success-modal" class="modal" aria-hidden="true" aria-labelledby="success-modal-title">
+    <div class="modal-overlay"></div>
+    <div class="modal-box">
+      <button type="button" class="modal-close" aria-label="Close modal" data-dismiss-success>&times;</button>
+      <h2 id="success-modal-title" class="modal-title">Success</h2>
+      <p id="success-modal-message" class="modal-message">Action completed successfully.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" data-dismiss-success>OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error modal -->
+  <div id="error-modal" class="modal" aria-hidden="true" aria-labelledby="error-modal-title">
+    <div class="modal-overlay"></div>
+    <div class="modal-box">
+      <button type="button" class="modal-close" aria-label="Close modal" data-dismiss-error>&times;</button>
+      <h2 id="error-modal-title" class="modal-title">Error</h2>
+      <p id="error-modal-message" class="modal-message">An error occurred.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" data-dismiss-error>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="site-footer-inner">
+      <div class="footer-col">
+        <h3 class="footer-heading">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="prosthetics-directory.html">Prosthetics</a></li>
+        </ul>
+      </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Help Center</h3>
+        <ul class="footer-list">
+          <li><a href="support.html#faq">FAQ</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Company</h3>
+        <ul class="footer-list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="sitemap.html">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Ace Prosthetics Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-init.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/forum-new.js"></script>
+  <script src="js/fab.js"></script>
+  <script>
+    if (window.PAH && window.PAH.trackAndSetBreadcrumb) {
+      window.PAH.trackAndSetBreadcrumb('Post');
+    }
+  </script>
+
+  <!-- Floating Action Button Container -->
+  <div class="fab-container" role="region" aria-label="Page accessibility controls">
+    <button id="fab-btn-increase" class="fab-btn fab-btn-increase" aria-label="Increase font size">A+</button>
+    <button id="fab-btn-decrease" class="fab-btn fab-btn-decrease" aria-label="Decrease font size">A−</button>
+    <button id="fab-btn-toggle-theme" class="fab-btn fab-btn-toggle-theme" aria-label="Toggle light and dark theme" title="Toggle between light and dark theme">�</button>
+  </div>
+</body>
+</html>

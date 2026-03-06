@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Prosthetics Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fab.css">
+    <script>
+      (function() {
+        var savedTheme = localStorage.getItem('fab_theme');
+        if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          savedTheme = 'dark';
+        }
+        
+        if (savedTheme === 'dark') {
+          var style = document.createElement('style');
+          style.id = 'theme-critical';
+          style.textContent = 'html{color-scheme:dark}body{background:#1A1A1A;color:#F5F9FC}.navbar{background:#2A2A2A;border-bottom-color:#404040}.navbar-brand{color:#4A90E2}.nav-link{color:#F5F9FC}.breadcrumb{background:#1A1A1A}.breadcrumb-list a{color:#4A90E2}.breadcrumb-list [aria-current="page"]{color:#B0B0B0}.card,.filters-section,.admin-container,.forum-controls,.section-header,.comparison-section,.prosthetic-card,.tutorial-card,.modal-content,.modal-overlay,.filter-checkbox{background:#2A2A2A;border-color:#404040;color:#F5F9FC}.dropdown-menu,.admin-dropdown-menu{background:#2A2A2A;border-color:#404040}.btn-primary{background:#4A90E2;color:#FFFFFF}.btn-secondary{background:#2A2A2A;color:#F5F9FC;border-color:#404040}input,select,textarea{background:#1A1A1A;color:#F5F9FC;border-color:#404040}.prosthetic-image-wrapper,.feature-badge,.filter-checkbox{background:#1A1A1A}.breadcrumb-list a:hover{color:#6BA3F0}.modal-actions{background:#1A1A1A;border-top-color:#404040}.page-title,.forum-page-title,.modal-header h2{color:#F5F9FC}.prosthetic-category,.feature-tag{background:rgba(74,144,226,0.15);color:#6BA3F0}.prosthetic-price{color:#6BA3F0}.prosthetic-type,.prosthetic-description,.tutorial-description{color:#B0B0B0}.tutorial-thumbnail::after{background:rgba(255,255,255,0.85)}.modal-section h3{color:#4A90E2}.info-label{color:#B0B0B0}.feature-tag{border-color:rgba(74,144,226,0.3)}';
+          document.head.appendChild(style);
+          document.documentElement.classList.add('dark-mode-pending');
+          document.body.classList.add('dark-mode');
+        } else if (savedTheme === 'light') {
+          document.documentElement.classList.remove('dark-mode-pending');
+          document.body.classList.remove('dark-mode');
+          document.documentElement.style.colorScheme = 'light';
+          var old = document.getElementById('theme-critical');
+          if (old && old.parentNode) old.parentNode.removeChild(old);
+        }
+      })();
+    </script>
+    <style>
+        .admin-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .error {
+            color: #d32f2f;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #ffebee;
+            border-radius: 4px;
+        }
+        .success {
+            color: #388e3c;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #e8f5e9;
+            border-radius: 4px;
+        }
+        .loading {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Add New Prosthetic</h1>
+        
+        <form id="prostheticForm">
+            <div class="form-group">
+                <label for="name">Prosthetic Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Image URLs</label>
+                <div id="imageUrlsContainer">
+                    <div class="image-url-input-group" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="url" class="image-url-input" placeholder="https://example.com/image1.jpg">
+                    </div>
+                </div>
+                <button type="button" id="addImageUrlBtn" class="btn-secondary" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem; margin-top: 5px;">+ Add Another Image</button>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">-- Select Category --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subCategory">Sub-Category</label>
+                <select id="subCategory" name="subCategory">
+                    <option value="">-- Select Sub-Category --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="capability">Capability *</label>
+                <select id="capability" name="capability" required>
+                    <option value="">-- Select Capability --</option>
+                </select>
+            </div>
+
+            <button type="submit">Add Prosthetic</button>
+        </form>
+
+        <div id="message"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase-init.js"></script>
+    <script>
+        const categorySelect = document.getElementById('category');
+        const subCategorySelect = document.getElementById('subCategory');
+        const capabilitySelect = document.getElementById('capability');
+        const form = document.getElementById('prostheticForm');
+        const messageDiv = document.getElementById('message');
+        const imageUrlsContainer = document.getElementById('imageUrlsContainer');
+        const addImageUrlBtn = document.getElementById('addImageUrlBtn');
+
+        let categoriesData = [];
+        let capabilitiesData = [];
+
+        // Load categories and capabilities on page load
+        async function loadInitialData() {
+            const supabase = window.sb;
+            try {
+                // Load categories
+                const { data: categories, error: categoriesError } = await supabase
+                    .from('categories')
+                    .select('id, name')
+                    .order('name');
+
+                if (categoriesError) throw categoriesError;
+                categoriesData = categories || [];
+
+                // Load capabilities
+                const { data: capabilities, error: capabilitiesError } = await supabase
+                    .from('capabilities')
+                    .select('id, name')
+                    .order('name');
+
+                if (capabilitiesError) throw capabilitiesError;
+                capabilitiesData = capabilities || [];
+
+                // Populate category dropdown
+                categoriesData.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    categorySelect.appendChild(option);
+                });
+
+                // Populate capability dropdown
+                capabilitiesData.forEach(capability => {
+                    const option = document.createElement('option');
+                    option.value = capability.id;
+                    option.textContent = capability.name;
+                    capabilitySelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('Error loading initial data:', error);
+                showMessage('Error loading data: ' + error.message, 'error');
+            }
+        }
+
+        // Load sub-categories when category changes
+        async function loadSubCategories(categoryId) {
+            const supabase = window.sb;
+            try {
+                // Clear previous sub-categories
+                subCategorySelect.innerHTML = '<option value="">-- Select Sub-Category --</option>';
+
+                if (!categoryId) return;
+
+                const { data: subCategories, error } = await supabase
+                    .from('sub_categories')
+                    .select('id, name')
+                    .eq('category_id', categoryId)
+                    .order('name');
+
+                if (error) throw error;
+
+                subCategories?.forEach(subCategory => {
+                    const option = document.createElement('option');
+                    option.value = subCategory.id;
+                    option.textContent = subCategory.name;
+                    subCategorySelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('Error loading sub-categories:', error);
+                showMessage('Error loading sub-categories: ' + error.message, 'error');
+            }
+        }
+
+        // Handle category change
+        categorySelect.addEventListener('change', (e) => {
+            loadSubCategories(e.target.value);
+        });
+
+        // Handle adding dynamic image URL inputs
+        addImageUrlBtn.addEventListener('click', () => {
+            const newInputGroup = document.createElement('div');
+            newInputGroup.className = 'image-url-input-group';
+            newInputGroup.style.display = 'flex';
+            newInputGroup.style.gap = '10px';
+            newInputGroup.style.marginBottom = '10px';
+
+            const newInput = document.createElement('input');
+            newInput.type = 'url';
+            newInput.className = 'image-url-input';
+            newInput.placeholder = 'https://example.com/image.jpg';
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.textContent = 'Remove';
+            removeBtn.className = 'btn-secondary';
+            removeBtn.style.width = 'auto';
+            removeBtn.style.padding = '0.5rem 1rem';
+            removeBtn.style.background = '#ff4d4f';
+            removeBtn.style.color = 'white';
+
+            removeBtn.addEventListener('click', () => {
+                newInputGroup.remove();
+            });
+
+            newInputGroup.appendChild(newInput);
+            newInputGroup.appendChild(removeBtn);
+            imageUrlsContainer.appendChild(newInputGroup);
+        });
+
+        // Handle form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const supabase = window.sb;
+
+            const name = document.getElementById('name').value?.trim();
+            const description = document.getElementById('description').value?.trim() || null;
+            
+            // Gather all image URLs into an array, filtering out empty ones
+            const imageUrlInputs = document.querySelectorAll('.image-url-input');
+            const imageUrls = Array.from(imageUrlInputs)
+                .map(input => input.value.trim())
+                .filter(url => url !== "");
+
+            const categoryId = document.getElementById('category').value;
+            const subCategoryId = document.getElementById('subCategory').value || null;
+            const capabilityId = document.getElementById('capability').value;
+
+            // Validate required fields
+            if (!name || !categoryId || !capabilityId) {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('prosthetics')
+                    .insert([
+                        {
+                            name,
+                            description,
+                            image_urls: imageUrls,
+                            category_id: categoryId,
+                            sub_category_id: subCategoryId,
+                            capability_id: capabilityId
+                        }
+                    ])
+                    .select();
+
+                if (error) throw error;
+
+                showMessage('Prosthetic added successfully!', 'success');
+                form.reset();
+                // Reset the image container to just one field
+                imageUrlsContainer.innerHTML = `
+                    <div class="image-url-input-group" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="url" class="image-url-input" placeholder="https://example.com/image1.jpg">
+                    </div>
+                `;
+                subCategorySelect.innerHTML = '<option value="">-- Select Sub-Category --</option>';
+
+            } catch (error) {
+                console.error('Error inserting prosthetic:', error);
+                showMessage('Error adding prosthetic: ' + error.message, 'error');
+            }
+        });
+
+        // Show/hide messages
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = type;
+            setTimeout(() => {
+                if (messageDiv.className === type) {
+                    messageDiv.textContent = '';
+                    messageDiv.className = '';
+                }
+            }, 5000);
+        }
+
+        // Wait for Supabase client to be initialized, then load data
+        function initializeUI() {
+            if (!window.sb) {
+                setTimeout(initializeUI, 100);
+                return;
+            }
+            loadInitialData();
+        }
+
+        // Load data on page load
+        initializeUI();
+    </script>
+
+    <script src="js/fab.js"></script>
+
+    <!-- Floating Action Button Container -->
+    <div class="fab-container" role="region" aria-label="Page accessibility controls">
+      <button id="fab-btn-increase" class="fab-btn fab-btn-increase" aria-label="Increase font size">A+</button>
+      <button id="fab-btn-decrease" class="fab-btn fab-btn-decrease" aria-label="Decrease font size">A−</button>
+      <button id="fab-btn-toggle-theme" class="fab-btn fab-btn-toggle-theme" aria-label="Toggle light and dark theme" title="Toggle between light and dark theme">�</button>
+    </div>
+</body>
+</html>

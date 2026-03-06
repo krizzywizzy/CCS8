@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Video tutorials on prosthetics care, types, and daily use. Features large accessible video players with captions and transcripts.">
+  <title>Video Tutorials | Ace Prosthetics Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fab.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('fab_theme');
+      if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        savedTheme = 'dark';
+      }
+      
+      if (savedTheme === 'dark') {
+        var style = document.createElement('style');
+        style.id = 'theme-critical';
+        style.textContent = 'html{color-scheme:dark}body{background:#1A1A1A;color:#F5F9FC}.navbar{background:#2A2A2A;border-bottom-color:#404040}.navbar-brand{color:#4A90E2}.nav-link{color:#F5F9FC}.breadcrumb{background:#1A1A1A}.breadcrumb-list a{color:#4A90E2}.breadcrumb-list [aria-current="page"]{color:#B0B0B0}.card,.filters-section,.admin-container,.forum-controls,.section-header,.comparison-section,.prosthetic-card,.tutorial-card,.modal-content,.modal-overlay,.filter-checkbox{background:#2A2A2A;border-color:#404040;color:#F5F9FC}.dropdown-menu,.admin-dropdown-menu{background:#2A2A2A;border-color:#404040}.btn-primary{background:#4A90E2;color:#FFFFFF}.btn-secondary{background:#2A2A2A;color:#F5F9FC;border-color:#404040}input,select,textarea{background:#1A1A1A;color:#F5F9FC;border-color:#404040}.prosthetic-image-wrapper,.feature-badge,.filter-checkbox{background:#1A1A1A}.breadcrumb-list a:hover{color:#6BA3F0}.modal-actions{background:#1A1A1A;border-top-color:#404040}.page-title,.forum-page-title,.modal-header h2{color:#F5F9FC}.prosthetic-category,.feature-tag{background:rgba(74,144,226,0.15);color:#6BA3F0}.prosthetic-price{color:#6BA3F0}.prosthetic-type,.prosthetic-description,.tutorial-description{color:#B0B0B0}.tutorial-thumbnail::after{background:rgba(255,255,255,0.85)}.modal-section h3{color:#4A90E2}.info-label{color:#B0B0B0}.feature-tag{border-color:rgba(74,144,226,0.3)}';
+        document.head.appendChild(style);
+        document.documentElement.classList.add('dark-mode-pending');
+        document.body.classList.add('dark-mode');
+      } else if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark-mode-pending');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.colorScheme = 'light';
+        var old = document.getElementById('theme-critical');
+        if (old && old.parentNode) old.parentNode.removeChild(old);
+      }
+    })();
+  </script>
+  <style>
+    /* ========== TUTORIALS DIRECTORY SPECIFIC STYLES ========== */
+
+    /* Filter panel styling */
+    .filters-section {
+      background: var(--secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    .filter-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: var(--background);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.12s ease;
+      min-height: var(--min-touch);
+    }
+
+    .filter-checkbox:hover {
+      border-color: var(--primary);
+      background: rgba(31, 58, 95, 0.05);
+    }
+
+    .filter-checkbox input[type="checkbox"] {
+      margin-right: 0.5rem;
+      cursor: pointer;
+      accent-color: var(--primary);
+      min-width: 18px;
+      min-height: 18px;
+    }
+
+    .filter-checkbox input[type="checkbox"]:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 1px;
+    }
+
+    .filter-checkbox.active {
+      background: rgba(31, 58, 95, 0.1);
+      border-color: var(--primary);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Tutorials grid */
+    .tutorials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tutorial-card {
+      background: var(--secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tutorial-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .tutorial-card:focus-within {
+      outline: 3px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .tutorial-thumbnail {
+      width: 100%;
+      height: 180px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tutorial-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tutorial-thumbnail::after {
+      content: '▶';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--primary);
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .tutorial-card:hover .tutorial-thumbnail::after {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .tutorial-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .tutorial-category {
+      display: inline-block;
+      background: rgba(31, 58, 95, 0.1);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+
+    .tutorial-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .tutorial-duration {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .tutorial-description {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tutorial-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-badge {
+      background: var(--background);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .watch-btn {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .empty-state h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .empty-state p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Responsive adjustments */
+    /* Modal styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      overflow-y: auto;
+      padding: 1rem;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--secondary);
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 64px rgba(0, 0, 0, 0.12);
+      animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .modal-close {
+      background: rgba(112, 121, 131, 0.04);
+      border: none;
+      color: #6b7684;
+      cursor: pointer;
+      font-size: 1.5rem;
+      line-height: 1;
+      min-width: 44px;
+      min-height: 44px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .modal-close:hover {
+      background: rgba(112, 121, 131, 0.12);
+      color: #2d3748;
+    }
+
+    .modal-close:focus {
+      outline: 2px solid #4a90e2;
+      outline-offset: 2px;
+      background: rgba(112, 121, 131, 0.08);
+    }
+
+    .modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-video-section {
+      display: flex;
+      justify-content: center;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .modal-video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .modal-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .modal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-section h3 {
+      margin: 0;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+    }
+
+    .modal-description,
+    .modal-transcript {
+      padding: 16px;
+      background: var(--background);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .modal-description p,
+    .modal-transcript p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .modal-actions {
+      padding: 16px 24px;
+      background: var(--background);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-actions .btn-secondary {
+      background: white;
+      color: var(--primary);
+      padding: 12px 24px;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .modal-actions .btn-secondary:hover {
+      background: rgba(31, 58, 95, 0.04);
+      border-color: #0052a3;
+    }
+
+    .modal-actions .btn-secondary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .filters-section {
+        padding: 1rem;
+      }
+
+      .filter-options {
+        gap: 0.5rem;
+      }
+
+      .filter-checkbox {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .tutorials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-video-section {
+        aspect-ratio: 16 / 9;
+      }
+
+      .modal-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .modal-header h2 {
+        font-size: 1.3rem;
+      }
+
+      .modal-close {
+        align-self: flex-end;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+        gap: 1.5rem;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        gap: 8px;
+      }
+
+      .modal-actions .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="navbar" role="banner">
+    <div class="navbar-inner">
+      <div class="nav-left">
+        <a href="index.html" class="navbar-brand">Ace Prosthetics Hub</a>
+      </div>
+      
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">&#9776;</button>
+      
+      <nav id="nav-menu" role="navigation" aria-label="Main">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="prosthetics-directory.html" class="nav-link">Prosthetics</a></li>
+          <li class="nav-item"><a href="forum.html" class="nav-link">Community Forum</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="support.html" class="nav-link">Support</a></li>
+        </ul>
+        
+        <div class="nav-right">
+          <div class="nav-item" id="nav-signup">
+            <a href="auth.html?mode=register" class="nav-link btn btn-primary">Sign In</a>
+          </div>
+          <div class="nav-item nav-item-logout" style="display: none;">
+            <span id="nav-user" class="nav-link" style="pointer-events: none;"></span>
+            <button type="button" id="nav-logout" class="btn btn-secondary">Logout</button>
+          </div>
+          <div class="nav-item nav-admin-dropdown" style="display: none;">
+            <button type="button" id="admin-menu-btn" class="nav-link btn btn-secondary" aria-expanded="false" aria-haspopup="true">Admin</button>
+            <div class="admin-dropdown-menu" role="menu">
+              <a href="admin-tutorials.html" class="admin-dropdown-item" role="menuitem">Tutorials</a>
+              <a href="admin-prosthetics.html" class="admin-dropdown-item" role="menuitem">Prosthetics</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <ol class="breadcrumb-list" id="breadcrumb-list"></ol>
+    </div>
+  </nav>
+
+  <main id="main-content" class="main-content" role="main">
+    <h1 class="page-title">Video Tutorials</h1>
+    <p class="page-intro">Learn about prosthetics through accessible video tutorials. Each video features captions, transcripts, and large controls for easy viewing.</p>
+
+    <!-- Filter Section -->
+    <section class="filters-section" aria-label="Tutorial Filters">
+      <!-- Category Filter -->
+      <div class="filter-group">
+        <label class="filter-label">Category</label>
+        <div class="filter-options" role="group" id="category-filters">
+          <label class="filter-checkbox">
+            <input type="checkbox" value="getting-started" class="category-filter" aria-label="Filter by Getting Started">
+            <span>Getting Started</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" value="care-maintenance" class="category-filter" aria-label="Filter by Care & Maintenance">
+            <span>Care & Maintenance</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" value="activities" class="category-filter" aria-label="Filter by Activities & Daily Life">
+            <span>Activities & Daily Life</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Level Filter -->
+      <div class="filter-group">
+        <label class="filter-label">Level</label>
+        <div class="filter-options" role="group" id="level-filters">
+          <label class="filter-checkbox">
+            <input type="checkbox" value="beginner" class="level-filter" aria-label="Filter by Beginner">
+            <span>Beginner</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" value="intermediate" class="level-filter" aria-label="Filter by Intermediate">
+            <span>Intermediate</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" value="advanced" class="level-filter" aria-label="Filter by Advanced">
+            <span>Advanced</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Reset Filters Button -->
+      <div style="margin-top: 1rem;">
+        <button id="reset-filters" class="btn btn-secondary">Reset All Filters</button>
+      </div>
+    </section>
+
+    <!-- Tutorials Grid (placeholder data) -->
+    <section aria-label="Video Tutorials">
+      <div id="tutorials-container" class="tutorials-grid">
+        <!-- Populated by JavaScript -->
+      </div>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <h2>No Tutorials Found</h2>
+        <p>Try adjusting your filters to see more results.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Template for Tutorial Details -->
+  <div id="tutorial-modal" class="modal-overlay" role="dialog" aria-labelledby="modal-tutorial-title" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-tutorial-title"></h2>
+        <button type="button" id="modal-close-btn" class="modal-close" aria-label="Close modal">×</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- YouTube Video Embed -->
+        <div class="modal-video-section">
+          <iframe id="modal-video-embed" class="modal-video" src="" title="Tutorial video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <!-- Tutorial Details -->
+        <div class="modal-details">
+          <div class="modal-section">
+            <h3>About This Tutorial</h3>
+            <div class="modal-description">
+              <p id="modal-description"></p>
+            </div>
+          </div>
+
+          <!-- Transcript Section -->
+          <div class="modal-section">
+            <h3>Transcript</h3>
+            <div class="modal-transcript">
+              <p id="modal-transcript"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Actions -->
+      <div class="modal-actions">
+        <button type="button" id="modal-close-footer" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="site-footer-inner">
+      <div class="footer-col">
+        <h3 class="footer-heading">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="prosthetics-directory.html">Prosthetics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Help Center</h3>
+        <ul class="footer-list">
+          <li><a href="support.html">Support & Getting Started</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Company</h3>
+        <ul class="footer-list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="sitemap.html">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Ace Prosthetics Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-init.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    /**
+     * ============================================================
+     * TUTORIALS DIRECTORY - SUPABASE INTEGRATION
+     * ============================================================
+     * Fetches tutorials from Supabase, implements filtering by category and level,
+     * and provides modal-based video viewing with transcripts
+     */
+
+    // ========== GLOBAL STATE ==========
+    let allTutorials = [];
+    let filteredTutorials = [];
+    let selectedCategories = new Set();
+    let selectedLevels = new Set();
+    let allLevels = ['beginner', 'intermediate', 'advanced'];
+    let currentTutorial = null;
+    
+    // Fixed display categories mapped to database values
+    const categoryMap = {
+      'Getting Started': 'gettingstarted',
+      'Care & Maintenance': 'care-maintenance',
+      'Activity & Daily Life': 'activity'
+    };
+
+    // ========== DOM REFERENCES ==========
+    const tutorialsContainer = document.getElementById('tutorials-container');
+    const emptyState = document.getElementById('empty-state');
+    const resetBtn = document.getElementById('reset-filters');
+    const tutorialModal = document.getElementById('tutorial-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalCloseFooter = document.getElementById('modal-close-footer');
+
+    // ========== INITIALIZE ==========
+    async function initializePage() {
+      // Set breadcrumb
+      if (window.PAH && window.PAH.trackAndSetBreadcrumb) {
+        window.PAH.trackAndSetBreadcrumb('Tutorials');
+      }
+
+      // Wait for Supabase to be ready (with timeout)
+      let supabaseReady = false;
+      let attempts = 0;
+      const maxAttempts = 50; // 5 seconds max (50 * 100ms)
+
+      while (!supabaseReady && attempts < maxAttempts) {
+        if (window.sb) {
+          supabaseReady = true;
+        } else {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          attempts++;
+        }
+      }
+
+      if (!supabaseReady) {
+        console.error('Supabase failed to initialize');
+        emptyState.style.display = 'block';
+        emptyState.innerHTML = '<h2>Unable to Load</h2><p>There was an issue connecting to the database. Please refresh the page.</p>';
+        return;
+      }
+
+      // Load tutorials from Supabase
+      await loadTutorials();
+
+      // Populate filter options
+      populateFilterOptions();
+
+      // Check for filter parameters in URL
+      const params = new URLSearchParams(window.location.search);
+      const categoryParam = params.get('category');
+      const levelParam = params.get('level');
+
+      if (categoryParam) {
+        selectedCategories.add(categoryParam);
+        const categoryCheckbox = document.querySelector(`input.category-filter[value="${categoryParam}"]`);
+        if (categoryCheckbox) {
+          categoryCheckbox.checked = true;
+          updateFilterUI(categoryCheckbox);
+        }
+      }
+
+      if (levelParam) {
+        selectedLevels.add(levelParam);
+        const levelCheckbox = document.querySelector(`input.level-filter[value="${levelParam}"]`);
+        if (levelCheckbox) {
+          levelCheckbox.checked = true;
+          updateFilterUI(levelCheckbox);
+        }
+      }
+
+      // Setup event listeners
+      setupFilterListeners();
+
+      // Setup modal handlers
+      setupModalHandlers();
+
+      // Apply filters and render
+      applyFilters();
+    }
+
+    /**
+     * LOAD TUTORIALS FROM SUPABASE
+     * Fetches all tutorials with category and level information
+     */
+    async function loadTutorials() {
+      try {
+        const { data, error } = await window.sb
+          .from('tutorials')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error loading tutorials:', error);
+          return;
+        }
+
+        allTutorials = data || [];
+      } catch (error) {
+        console.error('Failed to load tutorials:', error);
+      }
+    }
+
+    /**
+     * POPULATE FILTER OPTIONS
+     * Creates category and level filter checkboxes with fixed display categories
+     */
+    function populateFilterOptions() {
+      const categoryContainer = document.getElementById('category-filters');
+      const levelContainer = document.getElementById('level-filters');
+
+      // Clear existing filters
+      categoryContainer.innerHTML = '';
+      levelContainer.innerHTML = '';
+
+      // Create fixed category filters
+      Object.keys(categoryMap).forEach(displayName => {
+        const label = document.createElement('label');
+        label.className = 'filter-checkbox';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = categoryMap[displayName]; // Use DB value for filtering
+        checkbox.className = 'category-filter';
+        checkbox.setAttribute('aria-label', `Filter by ${displayName}`);
+
+        const span = document.createElement('span');
+        span.textContent = displayName; // Display the friendly name
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+        categoryContainer.appendChild(label);
+      });
+
+      // Create level filters
+      allLevels.forEach(level => {
+        const label = document.createElement('label');
+        label.className = 'filter-checkbox';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = level;
+        checkbox.className = 'level-filter';
+        checkbox.setAttribute('aria-label', `Filter by ${level}`);
+
+        const span = document.createElement('span');
+        span.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+        levelContainer.appendChild(label);
+      });
+    }
+
+    /**
+     * SETUP FILTER EVENT LISTENERS
+     */
+    function setupFilterListeners() {
+      document.querySelectorAll('.category-filter').forEach(filter => {
+        filter.addEventListener('change', handleCategoryChange);
+      });
+
+      document.querySelectorAll('.level-filter').forEach(filter => {
+        filter.addEventListener('change', handleLevelChange);
+      });
+
+      resetBtn.addEventListener('click', resetAllFilters);
+    }
+
+    /**
+     * HANDLE CATEGORY CHANGE
+     */
+    function handleCategoryChange(e) {
+      if (e.target.checked) {
+        selectedCategories.add(e.target.value);
+      } else {
+        selectedCategories.delete(e.target.value);
+      }
+
+      updateFilterUI(e.target);
+      updateURL();
+      applyFilters();
+    }
+
+    /**
+     * HANDLE LEVEL CHANGE
+     */
+    function handleLevelChange(e) {
+      if (e.target.checked) {
+        selectedLevels.add(e.target.value);
+      } else {
+        selectedLevels.delete(e.target.value);
+      }
+
+      updateFilterUI(e.target);
+      updateURL();
+      applyFilters();
+    }
+
+    /**
+     * RESET ALL FILTERS
+     */
+    function resetAllFilters() {
+      selectedCategories.clear();
+      selectedLevels.clear();
+
+      document.querySelectorAll('.category-filter').forEach(f => f.checked = false);
+      document.querySelectorAll('.level-filter').forEach(f => f.checked = false);
+      document.querySelectorAll('.filter-checkbox').forEach(cb => cb.classList.remove('active'));
+
+      updateURL();
+      applyFilters();
+    }
+
+    /**
+     * UPDATE FILTER UI
+     */
+    function updateFilterUI(filterInput) {
+      const label = filterInput.closest('.filter-checkbox');
+      if (filterInput.checked) {
+        label.classList.add('active');
+      } else {
+        label.classList.remove('active');
+      }
+    }
+
+    /**
+     * UPDATE URL WITH CURRENT FILTERS
+     */
+    function updateURL() {
+      const params = new URLSearchParams();
+
+      if (selectedCategories.size > 0) {
+        params.set('category', Array.from(selectedCategories)[0]);
+      }
+
+      if (selectedLevels.size > 0) {
+        params.set('level', Array.from(selectedLevels)[0]);
+      }
+
+      const queryString = params.toString();
+      const newURL = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
+      window.history.replaceState({}, '', newURL);
+    }
+
+    /**
+     * APPLY FILTERS
+     */
+    function applyFilters() {
+      if (selectedCategories.size === 0 && selectedLevels.size === 0) {
+        filteredTutorials = [...allTutorials];
+      } else {
+        filteredTutorials = allTutorials.filter(tutorial => {
+          if (selectedCategories.size > 0 && !selectedCategories.has(tutorial.video_category)) {
+            return false;
+          }
+
+          if (selectedLevels.size > 0 && !selectedLevels.has(tutorial.level)) {
+            return false;
+          }
+
+          return true;
+        });
+      }
+
+      renderTutorials();
+    }
+
+    /**
+     * RENDER TUTORIALS GRID
+     */
+    function renderTutorials() {
+      if (filteredTutorials.length === 0) {
+        tutorialsContainer.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      const html = filteredTutorials.map(tutorial => {
+        const youtubeId = tutorial.youtube_id;
+        const thumbnailUrl = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+        const levelLabel = tutorial.level.charAt(0).toUpperCase() + tutorial.level.slice(1);
+        
+        // Get display name from category map
+        const displayCategoryName = Object.keys(categoryMap).find(key => categoryMap[key] === tutorial.video_category) || tutorial.video_category;
+
+        return `
+          <article class="tutorial-card" role="button" tabindex="0" aria-label="Watch ${tutorial.title}" data-tutorial-id="${tutorial.id}">
+            <div class="tutorial-thumbnail">
+              <img src="${thumbnailUrl}" alt="Thumbnail for ${tutorial.title}">
+            </div>
+            <div class="tutorial-content">
+              <span class="tutorial-category">${displayCategoryName}</span>
+              <h2 class="tutorial-title">${tutorial.title}</h2>
+              <div class="tutorial-duration">⏱️ ${tutorial.duration || 'N/A'}</div>
+              <p class="tutorial-description">${tutorial.description || 'No description available'}</p>
+              <div class="tutorial-features">
+                <span class="feature-badge">${levelLabel}</span>
+              </div>
+              <button class="btn btn-primary watch-btn">Watch Tutorial</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      tutorialsContainer.innerHTML = html;
+
+      // Add click handlers
+      document.querySelectorAll('.tutorial-card').forEach(card => {
+        const tutorialId = card.getAttribute('data-tutorial-id');
+        const tutorial = allTutorials.find(t => t.id === tutorialId);
+
+        const openModal = () => {
+          if (tutorial) {
+            openTutorialModal(tutorial);
+          }
+        };
+
+        card.addEventListener('click', openModal);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal();
+          }
+        });
+      });
+    }
+
+    /**
+     * OPEN TUTORIAL MODAL
+     */
+    function openTutorialModal(tutorial) {
+      
+      currentTutorial = tutorial;
+
+      const displayCategoryName = Object.keys(categoryMap).find(key => categoryMap[key] === tutorial.video_category) || tutorial.video_category;
+
+      // Populate modal header
+      document.getElementById('modal-tutorial-title').textContent = tutorial.title;
+
+      // Populate video embed (privacy-enhanced domain with captions enabled)
+      const videoEmbed = document.getElementById('modal-video-embed');
+      videoEmbed.src = `https://www.youtube-nocookie.com/embed/${tutorial.youtube_id}?cc_load_policy=1`;
+
+      // Populate description
+      document.getElementById('modal-description').textContent = tutorial.description || 'No description available';
+
+      // Populate transcript
+      document.getElementById('modal-transcript').textContent = tutorial.transcript || 'No transcript available';
+
+      // Show modal
+      tutorialModal.classList.add('active');
+      tutorialModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * SETUP MODAL HANDLERS
+     */
+    function setupModalHandlers() {
+      modalCloseBtn.addEventListener('click', closeTutorialModal);
+      modalCloseFooter.addEventListener('click', closeTutorialModal);
+
+      // Close on outside click
+      tutorialModal.addEventListener('click', (e) => {
+        if (e.target === tutorialModal) {
+          closeTutorialModal();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && tutorialModal.classList.contains('active')) {
+          closeTutorialModal();
+        }
+      });
+    }
+
+    /**
+     * CLOSE TUTORIAL MODAL
+     */
+    function closeTutorialModal() {
+      // Remove focus from the close button before hiding the modal to prevent aria-hidden focus trap
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+
+      tutorialModal.classList.remove('active');
+      tutorialModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      document.getElementById('modal-video-embed').src = '';
+      currentTutorial = null;
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initializePage);
+  </script>
+
+  <script src="js/fab.js"></script>
+
+  <!-- Floating Action Button Container -->
+  <div class="fab-container" role="region" aria-label="Page accessibility controls">
+    <button id="fab-btn-increase" class="fab-btn fab-btn-increase" aria-label="Increase font size">A+</button>
+    <button id="fab-btn-decrease" class="fab-btn fab-btn-decrease" aria-label="Decrease font size">A−</button>
+    <button id="fab-btn-toggle-theme" class="fab-btn fab-btn-toggle-theme" aria-label="Toggle light and dark theme" title="Toggle between light and dark theme">�</button>
+  </div>
+</body>
+</html>

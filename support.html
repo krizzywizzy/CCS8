@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support & Getting Started | Ace Prosthetics Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fab.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('fab_theme');
+      if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        savedTheme = 'dark';
+      }
+      
+      if (savedTheme === 'dark') {
+        var style = document.createElement('style');
+        style.id = 'theme-critical';
+        style.textContent = 'html{color-scheme:dark}body{background:#1A1A1A;color:#F5F9FC}.navbar{background:#2A2A2A;border-bottom-color:#404040}.navbar-brand{color:#4A90E2}.nav-link{color:#F5F9FC}.breadcrumb{background:#1A1A1A}.breadcrumb-list a{color:#4A90E2}.breadcrumb-list [aria-current="page"]{color:#B0B0B0}.card,.filters-section,.admin-container,.forum-controls,.section-header,.comparison-section,.prosthetic-card,.tutorial-card,.modal-content,.modal-overlay,.filter-checkbox{background:#2A2A2A;border-color:#404040;color:#F5F9FC}.dropdown-menu,.admin-dropdown-menu{background:#2A2A2A;border-color:#404040}.btn-primary{background:#4A90E2;color:#FFFFFF}.btn-secondary{background:#2A2A2A;color:#F5F9FC;border-color:#404040}input,select,textarea{background:#1A1A1A;color:#F5F9FC;border-color:#404040}.prosthetic-image-wrapper,.feature-badge,.filter-checkbox{background:#1A1A1A}.breadcrumb-list a:hover{color:#6BA3F0}.modal-actions{background:#1A1A1A;border-top-color:#404040}.page-title,.forum-page-title,.modal-header h2{color:#F5F9FC}.prosthetic-category,.feature-tag{background:rgba(74,144,226,0.15);color:#6BA3F0}.prosthetic-price{color:#6BA3F0}.prosthetic-type,.prosthetic-description,.tutorial-description{color:#B0B0B0}.tutorial-thumbnail::after{background:rgba(255,255,255,0.85)}.modal-section h3{color:#4A90E2}.info-label{color:#B0B0B0}.feature-tag{border-color:rgba(74,144,226,0.3)}';
+        document.head.appendChild(style);
+        document.documentElement.classList.add('dark-mode-pending');
+        document.body.classList.add('dark-mode');
+      } else if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark-mode-pending');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.colorScheme = 'light';
+        var old = document.getElementById('theme-critical');
+        if (old && old.parentNode) old.parentNode.removeChild(old);
+      }
+    })();
+  </script>
+  <style>
+    /* Support page specific video styles */
+    #navigation-video-section .video-container {
+      width: 100%;
+      height: 60vh;
+      background: #000;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    #navigation-video-section .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Transcript toggle lives in page using existing FAQ styles */
+
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="navbar" role="banner">
+    <div class="navbar-inner">
+      <div class="nav-left">
+        <a href="index.html" class="navbar-brand">Ace Prosthetics Hub</a>
+      </div>
+      
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">&#9776;</button>
+      
+      <nav id="nav-menu" role="navigation" aria-label="Main">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="prosthetics-directory.html" class="nav-link">Prosthetics</a></li>
+          <li class="nav-item"><a href="forum.html" class="nav-link">Community Forum</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="support.html" class="nav-link active">Support</a></li>
+        </ul>
+        
+        <div class="nav-right">
+          <div class="nav-item" id="nav-signup">
+            <a href="auth.html?mode=register" class="nav-link btn btn-primary">Sign In</a>
+          </div>
+          <div class="nav-item nav-item-logout" style="display: none;">
+            <span id="nav-user" class="nav-link" style="pointer-events: none;"></span>
+            <button type="button" id="nav-logout" class="btn btn-secondary">Logout</button>
+          </div>
+          <div class="nav-item nav-admin-dropdown" style="display: none;">
+            <button type="button" id="admin-menu-btn" class="nav-link btn btn-secondary" aria-expanded="false" aria-haspopup="true">Admin</button>
+            <div class="admin-dropdown-menu" role="menu">
+              <a href="admin-tutorials.html" class="admin-dropdown-item" role="menuitem">Tutorials</a>
+              <a href="admin-prosthetics.html" class="admin-dropdown-item" role="menuitem">Prosthetics</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <ol class="breadcrumb-list" id="breadcrumb-list"></ol>
+    </div>
+  </nav>
+
+  <main id="main-content" class="main-content" role="main">
+    <h1 class="page-title">Support & Getting Started</h1>
+    <p>New to prosthetics? Start here for an overview and help using the Ace Prosthetics Hub.</p>
+
+    <section class="card">
+      <h2>Getting Started</h2>
+      <p>Choosing and using a prosthetic can feel overwhelming. This hub is designed to help you:</p>
+      <ul>
+        
+        <li><strong>Tutorials</strong> - Use the <a href="tutorials.html">Tutorials</a> section to learn about prosthetics and how to use them.</li>
+        <li><strong>Prosthetics</strong> - Use the <a href="prosthetics-directory.html">Prosthethetic Directory</a> to find and filter through the extensive list of prosthetics.</li>
+        <li><strong>Connect</strong> - Join the <a href="forum.html">Community Forum</a> to share experiences and ask questions.</li>
+        <li><strong>Contact Us</strong> - Need direct help? Visit our <a href="contact.html">Contact</a> page to get in touch with support.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="navigation-video-section">
+      <h2>How to navigate our website?</h2>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/F9Xbb6c0kkY?mute=1" title="How to navigate our website video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <details class="faq-item" style="margin-top:1rem;">
+        <summary><strong>Transcript</strong></summary>
+        <p>Welcome to Ace Prosthetics and I'll
+guide you through on how to navigate on
+our website. When you arrive at the main
+page, you'll see the full directory of
+our resources. And if you're not sure
+where to start, click on the site map to
+get a complete overview of all pages.
+Here you can explore our prosthetics,
+video tutorials, and manufacturers. Each
+item is organized with categories,
+levels, and a search function to help
+you exactly find what you need. We also
+have a sign up page where you can create
+account. After registering, you'll
+receive a confirmation email or you can
+simply log in with your Google account.
+Your account gives you access to our
+community forum where you can discuss
+prosthetics with other people and share
+experiences.</p>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>Site Map</h2>
+      <p>Use the site map to quickly locate pages and resources across the Ace Prosthetics Hub.</p>
+      <a href="sitemap.html" class="btn btn-secondary">View Site Map</a>
+    </section>
+
+    <section class="card">
+      <h2>Using this website</h2>
+      <ul>
+        <li><strong>Navigation</strong> — Use the menu at the top. The Tutorials item opens a dropdown when you click it. On mobile, tap the menu icon to open the full navigation.</li>
+        <li><strong>Breadcrumbs</strong> — Below the menu you’ll see your current location (e.g. Home &gt; Support). Click any part to go back.</li>
+        <li><strong>Keyboard</strong> — You can tab through links and buttons and use Enter/Space to activate them. Use Escape to close dropdowns.</li>
+      </ul>
+    </section>
+    <section class="card" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <details class="faq-item">
+          <summary><strong>What is the Ace Prosthetics Hub?</strong></summary>
+          <p>The Ace Prosthetics Hub is a dedicated online community and resource center. We provide accessible video tutorials, a comprehensive directory of global and local (Philippines) prosthetic providers, and a community forum where individuals can share experiences, ask questions, and support one another.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>Do I need to create an account to use the website?</strong></summary>
+          <p>No, you do not need an account to access our public resources! Anyone can browse the video tutorials, read the prosthetics directory, and view public forum posts. However, you will need to Sign Up for a free account if you want to post your own questions in the Community Forum or reply to other members.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>How do I reset my password if I forget it?</strong></summary>
+          <p>If you are having trouble logging in, click the "Sign In" button at the top of the page and select the "Forgot Password" link. Enter the email address associated with your account, and we will send you a secure link to reset your password.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>How do I find a prosthetic clinic or manufacturer near me?</strong></summary>
+          <p>Navigate to our Prosthetics page using the main menu. There, you will find our comprehensive directory table. It is divided into Global Manufacturers and regional providers (specifically in the Philippines). You can review their specialties, the types of services they offer, and click directly to their websites.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>The video tutorial is playing, but I cannot hear it well. Are there subtitles?</strong></summary>
+          <p>Yes! Accessibility is a top priority for us. All of our embedded video tutorials have Closed Captions (CC) enabled by default. If they do not appear, simply click the "CC" button in the bottom corner of the video player. Additionally, a full written transcript is provided just below the video player in the tutorial details.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>Can I suggest a new clinic, NGO, or tutorial to be added to the site?</strong></summary>
+          <p>Absolutely. We are always looking to expand our resources. Please head over to the Contact Us page and send us a message with the details of the organization or video you would like to see added. Our admin team will review it!</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>How do I ask a question in the Community Forum?</strong></summary>
+          <p>First, ensure you are logged into your account. Navigate to the Community Forum tab, and click the "New Post" or "Ask a Question" button. Give your post a clear title and provide as much detail as possible in the body so other community members can give you the best advice.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>Are the forums moderated?</strong></summary>
+          <p>Yes. To ensure the Ace Prosthetics Hub remains a safe, respectful, and helpful environment, our admin team monitors forum activity. Hate speech, harassment, spam, and dangerous medical misinformation are strictly prohibited and will be removed.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>I am experiencing a technical issue with the website (e.g., a video won't load, or a link is broken). What should I do?</strong></summary>
+          <p>We apologize for the inconvenience! Please visit our Contact Us page and fill out the form, or reach out directly to our Technical Support email listed on that page. Please include a brief description of the issue and what device/browser you are using so we can fix it right away.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary><strong>Is my personal information safe?</strong></summary>
+          <p>Yes. We use industry-standard secure databases (Supabase) to handle all user accounts and authentication. We will never sell your personal email or contact information to third parties.</p>
+        </details>
+      </div>
+    </section>
+    
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="site-footer-inner">
+      <div class="footer-col">
+        <h3 class="footer-heading">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="prosthetics-directory.html">Prosthetics</a></li>
+        </ul>
+      </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Help Center</h3>
+        <ul class="footer-list">
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Company</h3>
+        <ul class="footer-list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="sitemap.html">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Ace Prosthetics Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-init.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/fab.js"></script>
+  <script>
+    if (window.PAH && window.PAH.trackAndSetBreadcrumb) {
+      window.PAH.trackAndSetBreadcrumb('Support & Getting Started');
+    }
+  </script>
+
+
+  <!-- Floating Action Button Container -->
+  <div class="fab-container" role="region" aria-label="Page accessibility controls">
+    <button id="fab-btn-increase" class="fab-btn fab-btn-increase" aria-label="Increase font size">A+</button>
+    <button id="fab-btn-decrease" class="fab-btn fab-btn-decrease" aria-label="Decrease font size">A−</button>
+    <button id="fab-btn-toggle-theme" class="fab-btn fab-btn-toggle-theme" aria-label="Toggle light and dark theme" title="Toggle between light and dark theme">�</button>
+  </div>
+</body>
+</html>

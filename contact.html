@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with the Ace Prosthetics Hub. Send us a message, call us, or reach out via email or social media.">
+  <title>Contact Us | Ace Prosthetics Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fab.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('fab_theme');
+      if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        savedTheme = 'dark';
+      }
+      
+      if (savedTheme === 'dark') {
+        var style = document.createElement('style');
+        style.id = 'theme-critical';
+        style.textContent = 'html{color-scheme:dark}body{background:#1A1A1A;color:#F5F9FC}.navbar{background:#2A2A2A;border-bottom-color:#404040}.navbar-brand{color:#4A90E2}.nav-link{color:#F5F9FC}.breadcrumb{background:#1A1A1A}.breadcrumb-list a{color:#4A90E2}.breadcrumb-list [aria-current="page"]{color:#B0B0B0}.card,.filters-section,.admin-container,.forum-controls,.section-header,.comparison-section,.prosthetic-card,.tutorial-card,.modal-content,.modal-overlay,.filter-checkbox{background:#2A2A2A;border-color:#404040;color:#F5F9FC}.dropdown-menu,.admin-dropdown-menu{background:#2A2A2A;border-color:#404040}.btn-primary{background:#4A90E2;color:#FFFFFF}.btn-secondary{background:#2A2A2A;color:#F5F9FC;border-color:#404040}input,select,textarea{background:#1A1A1A;color:#F5F9FC;border-color:#404040}.prosthetic-image-wrapper,.feature-badge,.filter-checkbox{background:#1A1A1A}.breadcrumb-list a:hover{color:#6BA3F0}.modal-actions{background:#1A1A1A;border-top-color:#404040}.page-title,.forum-page-title,.modal-header h2{color:#F5F9FC}.prosthetic-category,.feature-tag{background:rgba(74,144,226,0.15);color:#6BA3F0}.prosthetic-price{color:#6BA3F0}.prosthetic-type,.prosthetic-description,.tutorial-description{color:#B0B0B0}.tutorial-thumbnail::after{background:rgba(255,255,255,0.85)}.modal-section h3{color:#4A90E2}.info-label{color:#B0B0B0}.feature-tag{border-color:rgba(74,144,226,0.3)}';
+        document.head.appendChild(style);
+        document.documentElement.classList.add('dark-mode-pending');
+        document.body.classList.add('dark-mode');
+      } else if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark-mode-pending');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.colorScheme = 'light';
+        var old = document.getElementById('theme-critical');
+        if (old && old.parentNode) old.parentNode.removeChild(old);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="navbar" role="banner">
+    <div class="navbar-inner">
+      <div class="nav-left">
+        <a href="index.html" class="navbar-brand">Ace Prosthetics Hub</a>
+      </div>
+      
+      <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">&#9776;</button>
+      
+      <nav id="nav-menu" role="navigation" aria-label="Main">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="prosthetics-directory.html" class="nav-link">Prosthetics</a></li>
+          <li class="nav-item"><a href="forum.html" class="nav-link">Community Forum</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="support.html" class="nav-link">Support</a></li>
+        </ul>
+        
+        <div class="nav-right">
+          <div class="nav-item" id="nav-signup">
+            <a href="auth.html?mode=register" class="nav-link btn btn-primary">Sign In</a>
+          </div>
+          <div class="nav-item nav-item-logout" style="display: none;">
+            <span id="nav-user" class="nav-link" style="pointer-events: none;"></span>
+            <button type="button" id="nav-logout" class="btn btn-secondary">Logout</button>
+          </div>
+          <div class="nav-item nav-admin-dropdown" style="display: none;">
+            <button type="button" id="admin-menu-btn" class="nav-link btn btn-secondary" aria-expanded="false" aria-haspopup="true">Admin</button>
+            <div class="admin-dropdown-menu" role="menu">
+              <a href="admin-tutorials.html" class="admin-dropdown-item" role="menuitem">Tutorials</a>
+              <a href="admin-prosthetics.html" class="admin-dropdown-item" role="menuitem">Prosthetics</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <ol class="breadcrumb-list" id="breadcrumb-list"></ol>
+    </div>
+  </nav>
+
+  <main id="main-content" class="main-content" role="main">
+    <h1 class="page-title">Contact Us</h1>
+    <p class="page-intro">Have a question or feedback? We'd love to hear from you. Send us a message using the form below or reach out via one of our other contact methods.</p>
+
+    <div class="contact-layout">
+      <!-- Contact Form Section (60% width) -->
+      <section class="card contact-form-section">
+        <h2>Send us a Message</h2>
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="contact-name" class="form-label">Name <span style="color: #E63946;">*</span></label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              class="form-control"
+              placeholder="Your full name"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email" class="form-label">Email <span style="color: #E63946;">*</span></label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              class="form-control"
+              placeholder="your.email@example.com"
+              required
+              aria-required="true"
+              aria-describedby="email-help"
+            />
+            <p id="email-help" class="helper-text">We'll use this to reply to your message</p>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-subject" class="form-label">Subject <span style="color: #E63946;">*</span></label>
+            <input
+              type="text"
+              id="contact-subject"
+              name="subject"
+              class="form-control"
+              placeholder="What is your message about?"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message" class="form-label">Message <span style="color: #E63946;">*</span></label>
+            <textarea
+              id="contact-message"
+              name="message"
+              class="form-control"
+              placeholder="Tell us what you think, ask a question, or share feedback..."
+              required
+              aria-required="true"
+              aria-describedby="message-help"
+            ></textarea>
+            <p id="message-help" class="helper-text">Please provide as much detail as you can</p>
+          </div>
+
+          <div id="form-status" style="display: none; margin-bottom: 1rem;" role="status" aria-live="polite"></div>
+
+          <button type="submit" class="btn btn-primary contact-submit-btn">Send Message</button>
+        </form>
+        <!-- Gmail fallback prompt -->
+        <div class="mailto-fallback" style="margin-top:1.5rem; text-align:center;">
+          <p style="font-size:0.9rem; color:var(--text-muted);">Form not working? Send us the message directly.</p>
+          <button type="button" id="gmail-fallback-btn" class="btn btn-secondary">Open Gmail</button>
+        </div>
+      </section>
+
+      <!-- Alternative Contact Methods (40% width) -->
+      <aside class="contact-info-section">
+        <h2>Get in Touch</h2>
+
+        <div class="info-card">
+          <h3>Email</h3>
+          <p>
+            <strong>General Inquiries:</strong><br />
+            <a href="mailto:adrianleesalacrito@su.edu.ph">Adrian Lee S. Alacrito (adrianleesalacrito@su.edu.ph)</a>
+          </p>
+          <p>
+            <strong>Technical Support:</strong><br />
+            <a href="mailto:khryzlexito@su.edu.ph">Khryz L. Exito (khryzlexito@su.edu.ph)</a>
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Phone</h3>
+          <p>
+            <strong>Main Line:</strong><br />
+            <a href="tel:+639622196010">(+63) 9622196010</a>
+          </p>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">
+            Monday through Friday, 9:00AM-5:00PM 
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Social Media</h3>
+          <p>Connect with us on social media:</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/adrian.lee.alacrito#" class="btn btn-secondary">Facebook</a>
+            <a href="https://www.instagram.com/bigboi.in.abigworld" target="_blank" class="btn btn-secondary">Instagram</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <!-- Additional Information -->
+    <section class="card contact-info-additional">
+      <h2>Response Times</h2>
+      <p>We typically respond to contact form submissions within <strong>24-48 hours</strong> during business days. For urgent matters, please call our main line or email our support team directly.</p>
+      <p>Community members can also post questions in our <a href="forum.html">Community Forum</a>, where both our team and experienced members may be able to help quickly.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="site-footer-inner">
+      <div class="footer-col">
+        <h3 class="footer-heading">Explore</h3>
+        <ul class="footer-list">
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="prosthetics-directory.html">Prosthetics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Help Center</h3>
+        <ul class="footer-list">
+          <li><a href="support.html#faq">FAQ</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Company</h3>
+        <ul class="footer-list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="sitemap.html">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Ace Prosthetics Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-init.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    if (window.PAH && window.PAH.trackAndSetBreadcrumb) {
+      window.PAH.trackAndSetBreadcrumb('Contact Us');
+    }
+
+    // Contact Form Handler — sends message to site team and opens user's mail client as fallback
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    // Fixed recipients
+    const CONTACT_RECIPIENTS = ['khryzlexito@su.edu.ph', 'adrianleesalacrito@su.edu.ph'];
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name') || '';
+        const email = formData.get('email') || '';
+        const subject = formData.get('subject') || 'Contact form message';
+        const message = formData.get('message') || '';
+        const timestamp = new Date().toISOString();
+
+        // Show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.textContent : 'Send Message';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+        }
+
+        try {
+          // Build email body for mailto fallback
+          const bodyLines = [];
+          bodyLines.push(`Name: ${name}`);
+          bodyLines.push(`From: ${email}`);
+          bodyLines.push(`Submitted: ${timestamp}`);
+          bodyLines.push('\nMessage:\n');
+          bodyLines.push(message);
+          const body = bodyLines.join('\n');
+
+          // Compose mailto URL with both recipients
+          const mailto = `mailto:${CONTACT_RECIPIENTS.join(',')}` +
+            `?subject=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(body)}`;
+
+          // Attempt to open user's mail client via an anchor click (less likely to be blocked)
+          const a = document.createElement('a');
+          a.href = mailto;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
+          // Optionally: here you could POST the message to a server or Supabase function if available.
+
+          // Show success message to user
+          formStatus.className = 'alert alert-success';
+          formStatus.innerHTML = `<strong>Sent to:</strong> ${CONTACT_RECIPIENTS.join(', ')}. Your email client should open — if it doesn't, please email us directly.`;
+          formStatus.style.display = 'block';
+
+          // Reset form
+          contactForm.reset();
+
+          // Hide success message after 8 seconds
+          setTimeout(() => {
+            formStatus.style.display = 'none';
+          }, 8000);
+        } catch (error) {
+          // Show error message
+          formStatus.className = 'alert alert-error';
+          formStatus.innerHTML = '<strong>Error:</strong> Failed to open your email client. Please email us directly at khryzlexito@su.edu.ph or adrianleesalacrito@su.edu.ph.';
+          formStatus.style.display = 'block';
+        } finally {
+          // Reset button
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        }
+      });
+
+      // Gmail fallback handler
+      const gmailBtn = document.getElementById('gmail-fallback-btn');
+      if (gmailBtn) {
+        gmailBtn.addEventListener('click', () => {
+          const formData = new FormData(contactForm);
+          const name = formData.get('name') || '';
+          const email = formData.get('email') || '';
+          const subject = formData.get('subject') || 'Contact form message';
+          const message = formData.get('message') || '';
+          const timestamp = new Date().toISOString();
+
+          const bodyLines = [];
+          bodyLines.push(`Name: ${name}`);
+          bodyLines.push(`From: ${email}`);
+          bodyLines.push(`Submitted: ${timestamp}`);
+          bodyLines.push('\nMessage:\n');
+          bodyLines.push(message);
+          const body = bodyLines.join('\n');
+
+          const toEmails = 'khryzlexito@su.edu.ph';
+          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${toEmails}` +
+            `&su=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(body)}`;
+
+          window.open(gmailUrl, '_blank');
+
+          formStatus.className = 'alert alert-success';
+          formStatus.textContent = 'Redirecting! A new tab is opening in Gmail to send your message.';
+          formStatus.style.display = 'block';
+          contactForm.reset();
+          setTimeout(() => {
+            formStatus.style.display = 'none';
+          }, 8000);
+        });
+      }
+    }
+  </script>
+
+  <script src="js/fab.js"></script>
+
+  <!-- Floating Action Button Container -->
+  <div class="fab-container" role="region" aria-label="Page accessibility controls">
+    <button id="fab-btn-increase" class="fab-btn fab-btn-increase" aria-label="Increase font size">A+</button>
+    <button id="fab-btn-decrease" class="fab-btn fab-btn-decrease" aria-label="Decrease font size">A−</button>
+    <button id="fab-btn-toggle-theme" class="fab-btn fab-btn-toggle-theme" aria-label="Toggle light and dark theme" title="Toggle between light and dark theme">�</button>
+  </div>
+</body>
+</html>
